@@ -1,0 +1,115 @@
+{
+  "name": "intl-formatter",
+  "version": "1.0.0",
+  "description": "Isomorphic universal Intl formatter for numbers, currency, dates, relative time, percentage and duration. Zero hydration mismatches. Works identically on server and client — Node.js, React, Next.js App Router, RSC, Express, Bun, Deno, and edge runtimes. Built-in LRU caching, zero dependencies, under 3KB gzipped, TypeScript first.",
+  "author": "gauravgorade",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "intl",
+    "intl-formatter",
+    "formatter",
+    "format",
+    "formatting",
+    "isomorphic",
+    "universal",
+    "number",
+    "number-format",
+    "number-formatter",
+    "currency",
+    "currency-format",
+    "currency-formatter",
+    "date",
+    "date-format",
+    "date-formatter",
+    "relative-time",
+    "relative-time-format",
+    "percentage",
+    "percentage-format",
+    "duration",
+    "duration-format",
+    "locale",
+    "locale-format",
+    "i18n",
+    "l10n",
+    "internationalization",
+    "localization",
+    "Intl.NumberFormat",
+    "Intl.DateTimeFormat",
+    "Intl.RelativeTimeFormat",
+    "Intl.PluralRules",
+    "intl-api",
+    "react",
+    "react-formatter",
+    "react-intl",
+    "react-i18n",
+    "react-format",
+    "nextjs",
+    "next-formatter",
+    "next-intl",
+    "next-i18n",
+    "app-router",
+    "server-components",
+    "rsc",
+    "server-side-rendering",
+    "ssr",
+    "nodejs",
+    "node-formatter",
+    "express",
+    "edge",
+    "edge-runtime",
+    "bun",
+    "deno",
+    "typescript",
+    "javascript",
+    "format-number",
+    "format-currency",
+    "format-date",
+    "format-duration",
+    "format-percentage"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gauravgorade/intl-formatter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gauravgorade/intl-formatter/issues"
+  },
+  "homepage": "https://gauravgorade.github.io/intl-formatter/",
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./testing": {
+      "types": "./dist/esm/testing.d.ts",
+      "import": "./dist/esm/testing.js",
+      "require": "./dist/cjs/testing.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "prebuild": "node -e \"const fs = require('fs'); if (fs.existsSync('dist')) fs.rmSync('dist', { recursive: true, force: true })\"",
+    "build": "tsc && tsc -p tsconfig.cjs.json && node -e \"const fs = require('fs'); fs.writeFileSync('dist/cjs/package.json', JSON.stringify({ type: 'commonjs' }))\"",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run test && npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  }
+}
