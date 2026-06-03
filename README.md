@@ -1,14 +1,17 @@
-# intl-formatter
+## intl-formatter
 
-[![npm version](https://img.shields.io/npm/v/intl-formatter.svg?style=flat-square)](https://www.npmjs.com/package/intl-formatter)
-[![license](https://img.shields.io/npm/l/intl-formatter.svg?style=flat-square)](https://github.com/gauravgorade/intl-formatter/blob/main/LICENSE)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/intl-formatter?style=flat-square)](https://bundlephobia.com/package/intl-formatter)
+[![npm version](https://img.shields.io/npm/v/intl-formatter)](https://www.npmjs.com/package/intl-formatter)
+[![License](https://img.shields.io/github/license/gauravgorade/intl-formatter)](https://github.com/gauravgorade/intl-formatter/blob/main/LICENSE)
+[![Bundlephobia](https://img.shields.io/bundlephobia/minzip/intl-formatter)](https://bundlephobia.com/package/intl-formatter)
+
+[Performance](#performance)
+
 
 Zero-dependency, isomorphic Intl formatting library for JavaScript and TypeScript. Seven synchronous, crash-safe methods for numbers, currency, percentages, durations, dates, and relative time. Identical output on server and client with no hydration mismatches, no framework lock-in, and built-in LRU caching of Intl instances. Under 3KB gzipped.
 
 Works in Node.js, React, Next.js App Router, Express, Bun, Deno, and edge runtimes.
 
-## Installation
+### Installation
 
 ```bash
 npm install intl-formatter
@@ -17,7 +20,7 @@ pnpm add intl-formatter
 bun add intl-formatter
 ```
 
-## Quick Start
+### Quick Start
 
 Call `createFormatter` once and import the instance wherever you need it.
 
@@ -42,7 +45,7 @@ fmt.date(new Date());  // "Jan 15, 2024"
 fmt.relativeTime(new Date(Date.now() - 60000)); // "1 minute ago"
 ```
 
-## API
+### API
 
 All methods are synchronous and crash-safe. Invalid inputs return the configured `fallback` value, which defaults to `"—"`.
 
@@ -56,7 +59,8 @@ All methods are synchronous and crash-safe. Invalid inputs return the configured
 | `dateTime` | `dateTime(value, options?)` | `"Jan 15, 2024, 2:30 PM"` |
 | `relativeTime` | `relativeTime(value, now?)` | `"3 minutes ago"` |
 
-## Node.js / Express / Bun / Deno
+
+### Node.js / Express / Bun / Deno
 
 ```javascript
 import { createFormatter } from "intl-formatter";
@@ -67,7 +71,7 @@ fmt.number(12500);    // "12,5K"
 fmt.currency(99.90);  // "99,90 €"
 ```
 
-## React
+### React
 
 Define the config outside the component so the reference stays stable across renders.
 
@@ -145,7 +149,7 @@ export function Price({ amount }: { amount: number }) {
 }
 ```
 
-## Next.js App Router
+### Next.js App Router
 
 Next.js requires separate handling for server and client. Server components call `getFormatter()` directly. Client components use `useFormatter()` from context. Both produce identical output.
 
@@ -249,7 +253,7 @@ export function Price({ amount }: { amount: number }) {
 }
 ```
 
-## Next.js Pages Router
+### Next.js Pages Router
 
 ```tsx
 import { FormatterProvider } from "@/lib/formatter/client";
@@ -265,7 +269,7 @@ export default function App({ Component, pageProps }) {
 }
 ```
 
-## Advanced
+### Advanced
 
 ### CLDR Pluralization Rules
 
@@ -313,7 +317,7 @@ fmt.date("1705320000");    // "Jan 15, 2024"
 fmt.date("1705320000000"); // "Jan 15, 2024"
 ```
 
-## Types
+### Types
 
 ```typescript
 import type {
@@ -331,7 +335,7 @@ import type {
 } from "intl-formatter";
 ```
 
-## Testing
+### Testing
 
 `intl-formatter/testing` exports stable, non-localized mocks so snapshots do not break across environments.
 
@@ -343,6 +347,23 @@ vi.mock("intl-formatter", () => ({
 }));
 ```
 
-## License
+## Performance
+
+Each benchmark call measures the full pipeline per call, including input validation, type coercion, compact threshold detection, override fast-path routing, LRU cache lookup, ICU output normalization, and fallback handling.
+
+The following measurements are the average of 10 consecutive runs in the same process with 10,000 iterations per run in the Node.js v22 runtime.
+
+| Formatter | ops/sec |
+| :--- | :--- |
+| number | 1,000,643 |
+| currency | 992,891 |
+| percentage | 620,193 |
+| duration | 436,392 |
+| date | 466,691 |
+| dateTime | 369,985 |
+| relativeTime | 609,472 |
+
+### License
 
 MIT © [gauravgorade](https://github.com/gauravgorade)
+

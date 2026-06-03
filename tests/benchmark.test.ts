@@ -78,7 +78,7 @@ test("run benchmark", () => {
   const endRelative = performance.now();
   const timeRelative = endRelative - startRelative;
 
-  console.log("\n================ BENCHMARK RESULTS ================");
+  console.log("\n---- BENCHMARK RESULTS ----");
   console.log(`Number Format:       ${timeNumber.toFixed(2)} ms (${Math.round((ITERATIONS * 2) / (timeNumber / 1000))} ops/sec)`);
   console.log(`Currency Format:     ${timeCurrency.toFixed(2)} ms (${Math.round((ITERATIONS * 2) / (timeCurrency / 1000))} ops/sec)`);
   console.log(`Percentage Format:   ${timePercentage.toFixed(2)} ms (${Math.round((ITERATIONS * 2) / (timePercentage / 1000))} ops/sec)`);
@@ -86,5 +86,5 @@ test("run benchmark", () => {
   console.log(`Date Format:         ${timeDate.toFixed(2)} ms (${Math.round(ITERATIONS / (timeDate / 1000))} ops/sec)`);
   console.log(`DateTime Format:     ${timeDateTime.toFixed(2)} ms (${Math.round(ITERATIONS / (timeDateTime / 1000))} ops/sec)`);
   console.log(`RelativeTime Format: ${timeRelative.toFixed(2)} ms (${Math.round(ITERATIONS / (timeRelative / 1000))} ops/sec)`);
-  console.log("===================================================\n");
+  console.log("--------\n");
 });

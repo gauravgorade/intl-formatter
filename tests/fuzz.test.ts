@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { createFormatter } from "../src/core/formatter.js";
 
-describe("next-formatter fuzzing and extreme inputs stress tests", () => {
+describe("fuzzing and extreme inputs stress tests", () => {
   const fmt = createFormatter({
     locale: "en-US",
     currency: "USD",
@@ -9,7 +9,7 @@ describe("next-formatter fuzzing and extreme inputs stress tests", () => {
   });
 
   const fuzzCorpus = [
-    // --- Primitives & Nil Shapes ---
+    // Primitives and nil values
     null,
     undefined,
     "",
@@ -18,7 +18,7 @@ describe("next-formatter fuzzing and extreme inputs stress tests", () => {
     true,
     false,
 
-    // --- Extreme & Subnormal Numbers ---
+    // Extreme and subnormal numbers
     0,
     -0,
     1,
@@ -36,7 +36,7 @@ describe("next-formatter fuzzing and extreme inputs stress tests", () => {
     Number.MAX_VALUE,
     Number.MIN_VALUE,
 
-    // --- Malformed String Numbers & dates ---
+    // Malformed string numbers and dates
     "123",
     "-123",
     "123.45",
@@ -52,7 +52,7 @@ describe("next-formatter fuzzing and extreme inputs stress tests", () => {
     "0o77", // Octal representation
     "1,234.56", // Pre-formatted string
 
-    // --- Date Inputs ---
+    // Date inputs
     new Date(),
     new Date(NaN),
     new Date("invalid-date-string"),
@@ -62,7 +62,7 @@ describe("next-formatter fuzzing and extreme inputs stress tests", () => {
     "-1705320000000", // Negative UNIX timestamp string
     99999999999999, // Way out of standard bounds
 
-    // --- Objects, Functions, Arrays, Symbols ---
+    // Objects, functions, arrays, and symbols
     [],
     [1, 2, 3],
     [null],
@@ -80,7 +80,7 @@ describe("next-formatter fuzzing and extreme inputs stress tests", () => {
         throw new Error("Toxic toString throw");
       },
     },
-    (() => {}) as any, // Plain function
+    (() => { }) as any, // Plain function
     Symbol("fuzz") as any, // Symbol input
     Promise.resolve(100) as any, // Unresolved promise
     /fuzz-regex/ as any, // Regular expression instance
