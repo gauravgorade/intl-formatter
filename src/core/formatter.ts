@@ -202,11 +202,11 @@ function normalizeICU(str: string, localeStr: string): string {
 
   for (let i = 0; i < str.length; i++) {
     const char = str[i];
-    if (char === ' ') {
+    if (char === " ") {
       hasSpace = true;
-    } else if (char === '\u202f' || char === '\u00a0') {
+    } else if (char === "\u202f" || char === "\u00a0") {
       hasSpecialSpace = true;
-    } else if (isEn && (char === 'k' || char === 'm' || char === 'b' || char === 't')) {
+    } else if (isEn && (char === "k" || char === "m" || char === "b" || char === "t")) {
       hasLowercaseSuffix = true;
     }
   }
@@ -399,7 +399,9 @@ export function createFormatter(config: FormatterConfig = {}): Formatter {
       if (typeof finalCurrency === "string") {
         finalCurrency = finalCurrency.toUpperCase();
         if (!CURRENCY_CODE_REGEX.test(finalCurrency)) {
-          console.warn(`[intl-formatter] Invalid override currency code "${finalCurrency}". Falling back to default: "${defaultCurrency}".`);
+          console.warn(
+            `[intl-formatter] Invalid override currency code "${finalCurrency}". Falling back to default: "${defaultCurrency}".`,
+          );
           finalCurrency = defaultCurrency;
         }
       }
@@ -566,7 +568,7 @@ export function createFormatter(config: FormatterConfig = {}): Formatter {
 
       return safeFormat(() => {
         const { fallback: _, ...rest } = options;
-        return normalizeICU(getDateTimeFormatter(locale, rest.dateStyle ? rest : { ...rules.dateFormat, ...rest }).format(date), locale);
+        return normalizeICU(getDateTimeFormatter(locale, rest).format(date), locale);
       }, callFallback);
     },
 
@@ -586,10 +588,7 @@ export function createFormatter(config: FormatterConfig = {}): Formatter {
 
       return safeFormat(() => {
         const { fallback: _, ...rest } = options;
-        return normalizeICU(
-          getDateTimeFormatter(locale, rest.dateStyle || rest.timeStyle ? rest : { ...rules.dateTimeFormat, ...rest }).format(date),
-          locale,
-        );
+        return normalizeICU(getDateTimeFormatter(locale, rest).format(date), locale);
       }, callFallback);
     },
 
@@ -619,12 +618,13 @@ export function createFormatter(config: FormatterConfig = {}): Formatter {
         const diffSec = Math.round((date.getTime() - now) / 1000);
         const abs = Math.abs(diffSec);
 
-        const rtfInstance = hasRelativeOverrides && opts
-          ? getRelativeTimeFormatter(locale, {
-              style: opts.style ?? rules.relativeTimeFormat?.style ?? "long",
-              numeric: opts.numeric ?? rules.relativeTimeFormat?.numeric ?? "auto",
-            })
-          : defaultRelativeTimeFormatter;
+        const rtfInstance =
+          hasRelativeOverrides && opts
+            ? getRelativeTimeFormatter(locale, {
+                style: opts.style ?? rules.relativeTimeFormat?.style ?? "long",
+                numeric: opts.numeric ?? rules.relativeTimeFormat?.numeric ?? "auto",
+              })
+            : defaultRelativeTimeFormatter;
 
         let formatted: string;
         if (abs < 60) {
