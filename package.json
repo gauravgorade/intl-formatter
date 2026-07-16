@@ -1,6 +1,6 @@
 {
   "name": "intl-formatter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Isomorphic universal Intl formatter for numbers, currency, dates, relative time, percentage and duration. Zero hydration mismatches. Works identically on server and client - Node.js, React, Next.js App Router, RSC, Express, Bun, Deno, and edge runtimes. Built-in LRU caching, zero dependencies, under 3KB gzipped, TypeScript first.",
   "author": "gauravgorade",
   "license": "MIT",
